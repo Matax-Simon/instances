@@ -45,7 +45,7 @@
 
       # If you want to configure the default gateway
       defaultGateway6 = {
-        address = "fe80::"; # Replace with your actual gateway for IPv6
+        address = "fe80::1"; # Replace with your actual gateway for IPv6
         interface = "${config.network.interface}";
       };
     };
