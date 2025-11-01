@@ -1,6 +1,5 @@
 {
   lib,
-  config,
   inputs,
   pkgs,
   ...
@@ -24,7 +23,7 @@
     networkmanager.enable = true;
     hostName = "matax-1";
 
-    firewall.allowedTCPPorts = [ 22 ];
+    firewall.allowedTCPPorts = [22];
   };
 
   # Set your time zone.
@@ -59,5 +58,5 @@
 
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
-  system.stateVersion = "25.11";
+  system.stateVersion = "25.05";
 }
