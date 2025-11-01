@@ -23,6 +23,8 @@
   networking = {
     networkmanager.enable = true;
     hostName = "matax-1";
+
+    firewall.allowedTCPPorts = [ 22 ];
   };
 
   # Set your time zone.
