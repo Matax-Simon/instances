@@ -11,7 +11,7 @@
   disko.devices = {
     disk = {
       sda = {
-        device = builtins.elemAt disks 0;
+        device = "/dev/sda";
         type = "disk";
         content = {
           type = "gpt";
@@ -49,7 +49,7 @@
       };
 
       sdb = {
-        device = builtins.elemAt disks 1;
+        device =  "/dev/sdb";
         type = "disk";
         content = {
           type = "gpt";
