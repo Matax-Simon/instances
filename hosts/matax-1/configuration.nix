@@ -9,6 +9,8 @@
 
     inputs.home-manager.nixosModules.home-manager
     inputs.self.homeModules.nixpkgs
+    inputs.self.homeModules.network
+    inputs.self.homeModules.boot
     inputs.self.homeModules.users.bahrom04
   ];
 

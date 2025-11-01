@@ -15,28 +15,56 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  boot.initrd.availableKernelModules = [
-    "vmd"
-    "xhci_pci"
-    "ahci"
-    "nvme"
-    "usbhid"
-    "usb_storage"
-    "sd_mod"
-  ];
-  boot.initrd.kernelModules = ["nvme"];
-  boot.kernelModules = [
-    "kvm-intel"
-  ];
-  boot.extraModulePackages = [];
+  boot = {
+    kernelModules = [];
+    extraModulePackages = [];
+
+    initrd = {
+      kernelModules = [
+        "nvme"
+        "kvm-intel"
+      ];
+
+      availableKernelModules = [
+        "xhci_pci"
+        "ahci"
+        "nvme"
+        "usbhid"
+      ];
+    };
+
+    bios = {
+      enable = true;
+      uefi = true;
+      raided = true;
+      mirrors = [
+        "/dev/sda"
+        "/dev/sdb"
+      ];
+    };
+  };
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
   # still possible to use this option, but it's recommended to use it in conjunction
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
-  networking.useDHCP = lib.mkDefault true;
+  # networking.useDHCP = lib.mkDefault true;
   # networking.interfaces.eno1.useDHCP = lib.mkDefault true;
   # networking.interfaces.wlp3s0.useDHCP = lib.mkDefault true;
+
+  network = {
+    enable = true;
+
+    ipv4 = {
+      enable = true;
+      address = "138.201.20.239";
+    };
+
+    ipv6 = {
+      enable = true;
+      address = "2a01:4f8:171:2bed::2";
+    };
+  };
 
   # List packages system hardware configuration
   hardware = {
