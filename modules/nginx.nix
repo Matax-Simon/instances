@@ -10,20 +10,29 @@
     "default_server" = {
       default = true;
       serverName = "_";
+      listen = [
+        {
+          addr = "0.0.0.0";
+          port = 80;
+          default = true;
+        }
+        {
+          addr = "0.0.0.0";
+          port = 443;
+          ssl = true;
+          default = true;
+        }
+      ];
       extraConfig = ''
         return 444;
       '';
     };
 
-    "matrix.uz" = {
-      default = true;
+    "${cfg.domain}" = {
       forceSSL = true;
       enableACME = true;
       serverAliases = cfg.alias;
       root = "/var/www/matax-uz";
-      extraConfig = ''
-        return 444;
-      '';
     };
   };
 
