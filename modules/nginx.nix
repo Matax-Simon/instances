@@ -27,8 +27,8 @@
   default = {
     "${cfg.domain}" = {
       root = "/var/www/matax-uz";
-      addSSL = true;
-      # forceSSL = true;
+      # addSSL = true;
+      forceSSL = true;
       enableACME = true;
     };
   };
