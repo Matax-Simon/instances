@@ -19,13 +19,19 @@
     inputs.self.homeModules.home.fish
     inputs.self.homeModules.home.starship
     inputs.self.homeModules.home.packages
+    inputs.self.homeModules.home.nginx
     inputs.self.homeModules.users.bahrom04
   ];
 
-  # Bootloader.
-  # boot.loader = {
-  #   systemd-boot.enable = true;
-  # };
+  # Kolyma services
+  matax = {
+    # https://matax.uz
+    www = {
+      enable = true;
+      instance = 1;
+      alias = ["matax.uz"];
+    };
+  };
 
   # Enable networking
   networking = {
