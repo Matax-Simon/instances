@@ -3,8 +3,8 @@
     enable = true;
     enableCompletion = true;
     syntaxHighlighting.enable = true;
-    autosuggestion.enable = true;
-    initContent = ''
+    autosuggestions.enable = true;
+    shellInit = ''
       eval "$(starship init zsh)"
     '';
   };

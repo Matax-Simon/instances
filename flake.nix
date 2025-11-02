@@ -9,11 +9,6 @@
     # flake-utils.url = "github:numtide/flake-utils";
     flake-parts.url = "github:hercules-ci/flake-parts";
 
-    # Home manager
-    home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     # Disko for easier partition management
     disko = {
       url = "github:nix-community/disko";

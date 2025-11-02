@@ -33,15 +33,15 @@ in {
       };
     };
 
-    home-manager = {
-      backupFileExtension = "hbak";
-      extraSpecialArgs = {
-        inherit inputs outputs;
-      };
-      users = {
-        # Import your home-manager configuration
-        bahrom = import ../../hosts/matax-1/home.nix;
-      };
-    };
+    # home-manager = {
+    #   backupFileExtension = "hbak";
+    #   extraSpecialArgs = {
+    #     inherit inputs outputs;
+    #   };
+    #   users = {
+    #     # Import your home-manager configuration
+    #     bahrom = import ../../hosts/matax-1/home.nix;
+    #   };
+    # };
   };
 }
