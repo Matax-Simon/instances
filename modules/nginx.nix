@@ -1,6 +1,6 @@
 {
   lib,
-  pkgs,
+  # pkgs,
   config,
   ...
 }: let
@@ -23,32 +23,6 @@
         root = "/var/www/matax-uz";
       };
     };
-
-  mkCDN = builtins.mapAttrs (name: value: {
-    addSSL = true;
-    enableACME = true;
-    root = value.path;
-    serverAliases = value.alias;
-    locations = lib.mkIf (value.mode == "static") {
-      "/".extraConfig = ''
-        try_files $uri $uri/ $uri.html =404;
-
-        ${lib.optionalString (value.extra != null) ''
-          ${value.extra}
-        ''}
-      '';
-    };
-
-    extraConfig = ''
-      ${lib.optionalString (value.mode == "browse") ''
-        autoindex on;
-      ''}
-
-      ${lib.optionalString (value.extra != null) ''
-        ${value.extra}
-      ''}
-    '';
-  });
 in {
   options = {
     matax.www = {
@@ -56,12 +30,6 @@ in {
         type = lib.types.bool;
         default = true;
         description = "Enable the web server/proxy.";
-      };
-
-      instance = lib.mkOption {
-        type = lib.types.number;
-        example = 1;
-        description = "Identifier signature of the current instance.";
       };
 
       domain = lib.mkOption {
@@ -86,12 +54,6 @@ in {
         type = with lib.types; attrsOf (submodule anything);
         default = {};
         description = "List of hosted service instances.";
-      };
-
-      cdn = lib.mkOption {
-        type = with lib.types; attrsOf (submodule lib.kotypes.cdn);
-        default = {};
-        description = "List of cdn services hosted in this instance.";
       };
     };
   };
@@ -119,27 +81,6 @@ in {
       virtualHosts = lib.mkMerge [
         default
         cfg.hosts
-
-        # (mkCDN cfg.cdn)
-        # (mkCDN {
-        #   "cdn${toString cfg.instance}.kolyma.uz" = {
-        #     path = "/srv";
-        #     mode = "browse";
-        #     alias = [];
-        #     extra = "
-        #       add_before_body /.html/top.html;
-        #       add_after_body /.html/bot.html;
-        #       autoindex_localtime on;
-        #       autoindex_exact_size on;
-        #       sub_filter '<html>' '';
-        #       sub_filter '<head><title>Index of $uri</title></head>' '';
-        #       sub_filter '<body bgcolor=\"white\">' '';
-        #       sub_filter '</body>' '';
-        #       sub_filter '</html>' '';
-        #       sub_filter_once on;
-        #     ";
-        #   };
-        # })
       ];
     };
 
@@ -160,18 +101,6 @@ in {
       80
       443
     ];
-
-    # system.activationScripts.nginxTheme = let
-    #   theme = pkgs.fetchzip {
-    #     url = "https://github.com/uzinfocom-org/autoindex/archive/refs/heads/main.zip";
-    #     hash = "sha256-bBsL22+mlMuFNzaEVxPq0Bg/f9IXELJEVzgWMBqGfF8=";
-    #   };
-    # in {
-    #   text = ''
-    #     #!/bin/sh
-    #     cp -R ${theme}/.html /srv
-    #   '';
-    # };
   };
 
   # meta = {
