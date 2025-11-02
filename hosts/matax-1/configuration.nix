@@ -11,6 +11,7 @@
     inputs.self.homeModules.nixpkgs
     inputs.self.homeModules.network
     inputs.self.homeModules.boot
+    inputs.self.homeModules.ssh
     inputs.self.homeModules.users.bahrom04
   ];
 

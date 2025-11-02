@@ -26,14 +26,10 @@ in {
           "input"
         ];
 
-        openssh.authorizedKeys.keys = lib.strings.splitString "\n" (
-          builtins.readFile (
-            builtins.fetchurl {
-              url = "https://github.com/bahrom04.keys";
-              sha256 = "";
-            }
-          )
-        );
+        openssh.authorizedKeys.keys = [
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDH+EVAeaZpe98gggH8fPQ4bKEgw2FbTqYzngTRSpSbp magdiyevbahrom04@gmail.com"
+          # add more
+        ];
       };
     };
 

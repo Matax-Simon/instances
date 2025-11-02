@@ -6,7 +6,7 @@
 {
   git = import ./git.nix;
   zsh = import ./zsh.nix;
-  ssh = import ./ssh.nix;
+  # ssh = import ./ssh.nix;
   fish = import ./fish.nix;
   starship = import ./starship.nix;
   packages = import ./packages.nix;
