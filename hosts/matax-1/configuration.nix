@@ -37,7 +37,17 @@
     networkmanager.enable = true;
     hostName = "matax-1";
 
-    firewall.allowedTCPPorts = [22];
+    firewall = {
+      allowedTCPPorts = [
+        22
+        80
+        443
+      ];
+      allowedUDPPorts = [
+        80
+        443
+      ];
+    };
   };
 
   # Set your time zone.
