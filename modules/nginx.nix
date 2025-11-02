@@ -9,10 +9,7 @@
   default = {
     "default_server" = {
       default = true;
-      forceSSL = true;
-      enableACME = true;
-      serverAliases = cfg.alias;
-      root = "/var/www/matax-uz";
+      serverName = "_";
       extraConfig = ''
         return 444;
       '';
