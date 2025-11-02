@@ -13,13 +13,13 @@
     inputs.self.homeModules.ssh
     inputs.self.homeModules.direnv
     inputs.self.homeModules.nixpkgs
+    inputs.self.homeModules.nginx
     #inputs.self.# homeModules.home.git
     # inputs.self.homeModules.home.fastfetch
     inputs.self.homeModules.home.zsh
     inputs.self.homeModules.home.fish
     inputs.self.homeModules.home.starship
     inputs.self.homeModules.home.packages
-    inputs.self.homeModules.home.nginx
     inputs.self.homeModules.users.bahrom04
   ];
 
@@ -28,8 +28,7 @@
     # https://matax.uz
     www = {
       enable = true;
-      instance = 1;
-      alias = ["matax.uz"];
+      domain = "matax.uz";
     };
   };
 
