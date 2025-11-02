@@ -6,35 +6,23 @@
 }: let
   cfg = config.matax.www;
 
-  default = {
-    "default_server" = {
-      default = true;
-      serverName = "_";
-      listen = [
-        {
-          addr = "0.0.0.0";
-          port = 80;
-          default = true;
-        }
-        {
-          addr = "0.0.0.0";
-          port = 443;
-          ssl = true;
-          default = true;
-        }
-      ];
-      extraConfig = ''
-        return 444;
-      '';
+  default =
+    if (cfg.domain == "")
+    then {
+      "default_server" = {
+        default = true;
+        root = "/var/www/matax-uz";
+      };
+    }
+    else {
+      ${cfg.domain} = {
+        default = true;
+        forceSSL = true;
+        enableACME = true;
+        serverAliases = cfg.alias;
+        root = "/var/www/matax-uz";
+      };
     };
-
-    "${cfg.domain}" = {
-      forceSSL = true;
-      enableACME = true;
-      serverAliases = cfg.alias;
-      root = "/var/www/matax-uz";
-    };
-  };
 
   mkCDN = builtins.mapAttrs (name: value: {
     addSSL = true;
